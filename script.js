@@ -86,9 +86,6 @@ function displayMessage(val1, val2) {
     }
 }
 
-//Change the avatar from the displays
-function displayEmojis(user, computer) {
-    
-}
+
 
 
