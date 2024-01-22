@@ -2,27 +2,31 @@
 let computerChoice = document.getElementById("computerChoice");
 let results = document.getElementById("resultDisplay");
 let playerChoice = document.getElementById("playerChoice");
-let score = document.getElementById("score");
+let playerScore = document.getElementById("playerScore");
+let computerScore = document.getElementById("computerScore");
 let paper = document.getElementById("paper");
 let rock = document.getElementById("rock");
 let scissors = document.getElementById("scissors");
 
 //initializing variables for player's choice
-let paperVal;
-let rockVal;
-let scissorsVal;
+let playerVal;
 let computerVal;
+let playerScores = 0;
+let computerScores = 0;
 
 //Adding events to my buttons to store values
 paper.addEventListener("click", () => {
-   paperVal =  paper.dataset.value = "paper";
+  playerVal= "paper";
+  playGame();
 });
 
 rock.addEventListener("click", () => {
- rockVal = rock.dataset.value = "rock";
+  playerVal = "rock";
+  playGame();
 });
 scissors.addEventListener("click", () => {
- scissorsVal =  scissors.dataset.value = "paper";
+  playerVal = "scissors";
+  playGame();
 });
 
 //Letting the computer choose.
@@ -65,7 +69,7 @@ let findWinner = (str1, str2) => {
   if (str1 === str2) {
     return 0;
   } else {
-    compareValues(str1, str2);
+   return compareValues(str1, str2);
   }
 };
 
@@ -74,18 +78,44 @@ function displayMessage(val1, val2) {
     let res = findWinner(val1, val2);
 
     if (res === 0) {
-        results.textContent = "It's a tie !!!";
-        return "tie";
+        results.textContent = "It's a tie !!!";  
     } else if (res === 1) {
-        results.textContent = "Congrats!! You won this round."
-        score ++;
-        return "win";
+      results.textContent = "Congrats!! You won this round."
+      playerScores ++;
+      playerScore.textContent = `Player two score: ${playerScores}`;
     } else {
-        results.textContent = "Sorry. You lost this round."
-        return "loss";
+      results.textContent = "Sorry. You lost this round."
+       computerScores++;
+       computerScore.textContent = `Player one score: ${computerScores}`;
     }
 }
 
+//Display emojis in the player's div container
+function displayPlayerEmojis() {
+  if (playerVal === "paper") {
+    playerChoice.textContent = "🤚🏽";
+  }else if (playerVal === "scissors") {
+    playerChoice.textContent = "✌🏽";
+  }else  if (playerVal === "rock") {
+    playerChoice.textContent = "✊🏽";
+  }
+}
 
+//Display emojis in the computer's div container 
+function displayComputerEmojis() {
+  if (computerVal === "rock") {
+    computerChoice.textContent = "✊🏽";
+  }else if (computerVal === "paper") {
+     computerChoice.textContent = "🤚🏽";
+   }else if (computerVal === "scissors") {
+     computerChoice.textContent = "✌🏽";
+   }
+}
 
-
+//Function to play the game
+function playGame() {
+  compChoice();
+  displayMessage(playerVal, computerVal);
+  displayPlayerEmojis();
+  displayComputerEmojis();
+}

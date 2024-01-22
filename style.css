@@ -22,7 +22,7 @@ body{
 }
 
 #results{
-    margin:15px;
+    margin-bottom: 10px;
     padding:.25em;
     height:2em;
     width:35em;
